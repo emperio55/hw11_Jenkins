@@ -9,6 +9,7 @@ public class PageObjectsFormTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
+    @Tag("simple")
     void fillFormTest(){
         registrationPage.openPage()
                 .cleanBannersOnPage()
@@ -55,7 +56,6 @@ public class PageObjectsFormTest extends TestBase {
     }
 
     @Test
-    @Tag("simple")
     void checkEmailFieldWithoutDomainTest(){
         registrationPage.openPage()
                 .cleanBannersOnPage()
