@@ -1,16 +1,22 @@
 package tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 import static tests.TestData.*;
 
+@DisplayName("Форма регистрации")
 public class PageObjectsFormTest extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
+    @DisplayName("Проверка формы регистрации")
     @Tag("simple")
     void fillFormTest(){
+        SelenideLogger.addListener("allure", new AllureSelenide());
         registrationPage.openPage()
                 .cleanBannersOnPage()
                 .setFirsName(firstName)

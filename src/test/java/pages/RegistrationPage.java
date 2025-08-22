@@ -1,5 +1,6 @@
 package pages;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 import pages.components.TableResultComponent;
 
@@ -32,68 +33,72 @@ public class RegistrationPage {
     private final String ERROR_BORDER_COLOR = "rgb(220, 53, 69)";
 
     CalendarComponent calendarComponent = new CalendarComponent();
+    @Step("Открыть форму регистрации")
     public RegistrationPage openPage(){
         open("/automation-practice-form");
         return this;
     }
+    @Step("Убрать баннеры")
     public RegistrationPage cleanBannersOnPage(){
             executeJavaScript("$('#fixedban').remove()");
             executeJavaScript("$('footer').remove()");
             return this;
-        }
-
+    }
+    @Step("Ввод имени")
     public RegistrationPage setFirsName(String value){
         firstNameInput.setValue(value);
         return this;
     }
-
+    @Step("Ввод фамилии")
     public RegistrationPage setLastName(String value){
         lastNameInput.setValue(value);
         return this;
     }
-
+    @Step("Ввод email")
     public RegistrationPage setUserEmail(String value){
         userEmail.setValue(value);
         return this;
     }
-
+    @Step("Выбор пола")
     public RegistrationPage setUserGender(String value) {
         userGender.$(byText(value)).click();
         return this;
     }
-
+    @Step("Выбор номера телефона")
     public RegistrationPage setUserPhone(String value) {
         userPhone.setValue(value);
         return this;
     }
-
+    @Step("Установка даты рождения")
     public RegistrationPage setDateOfBirth(int day, String month, int year) {
         birthInput.click();
         calendarComponent.setDate(day, month, String.valueOf(year));
         return this;
     }
-
+    @Step("Выбор предметов")
     public RegistrationPage setUserSubjects(String value) {
         userSubjects.click();
         userSubjectsInput.setValue(value);
         $$("#react-select-2-option-0").findBy(text(value)).click();
         return this;
     }
-
+    @Step("Выбор хобби")
     public RegistrationPage chooseHobbies(String hobbies) {
         userHobbies.$(byText(hobbies)).click();
         return this;
     }
-
+    @Step("Загрузить изображание")
     public RegistrationPage uploadFile(String fileName) {
         selectPicture.uploadFromClasspath(fileName);
         return this;
     }
+    @Step("Ввод текущего адреса")
     public RegistrationPage setCurrentAddress(String address) {
         addressInput.scrollTo().click();
         addressInput.setValue(address);
         return this;
     }
+    @Step("Выбор штата и города")
     public RegistrationPage setStateAndCity(String state, String city) {
         setState.scrollTo().click();
         chooseStateOfList.$(byText(state)).click();
@@ -101,19 +106,22 @@ public class RegistrationPage {
         chooseCityOfList.$(byText(city)).click();
         return this;
     }
+    @Step("Нажать кнопку подтвердить")
     public RegistrationPage clickSubmitButton(){
         submitButton.click();
         return this;
     }
+    @Step("Таблица с данными отображается")
     public RegistrationPage checkTableResultVisible(){
         tableResultComponent.checkTableVisible();
         return this;
     }
+    @Step("Таблица с данными не отображается")
     public RegistrationPage checkTableResultUnvisible(){
         tableResultComponent.checkTableUnvisible();
         return this;
     }
-
+    @Step("Сверка введенных значений")
     public RegistrationPage checkResult(String key, String value){
         tableResultComponent.compareUserData(key,value);
         return this;
