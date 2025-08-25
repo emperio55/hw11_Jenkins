@@ -16,7 +16,6 @@ public class PageObjectsFormTest extends TestBase {
     @DisplayName("Проверка формы регистрации")
     @Tag("simple")
     void fillFormTest(){
-        SelenideLogger.addListener("allure", new AllureSelenide());
         registrationPage.openPage()
                 .cleanBannersOnPage()
                 .setFirsName(firstName)
